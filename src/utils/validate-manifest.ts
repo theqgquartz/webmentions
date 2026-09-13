@@ -1,0 +1,1 @@
+/home/dcb/plugins/quartz-plugins/utils/validate-manifest.ts
