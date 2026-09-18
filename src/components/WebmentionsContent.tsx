@@ -138,6 +138,7 @@ export default ((opts?: Partial<WebmentionsContentOptions>) => {
             )}
           </div>
           {(tally.mentions?.length ?? 0) > 0 && <WebmentionsList mentions={tally.mentions} />}
+          <hr/>
         </div>
       );
     } else {

@@ -20,9 +20,10 @@ plugins:
       showRMentions: true
     layout:
       position: afterBody
-      priority: 20```
+      priority: 20
+````
 
 ## License
 
 MIT
-````
+
