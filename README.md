@@ -10,7 +10,7 @@ npx quartz plugin add github:theqgquartz/webmentions
 
 ## Usage
 
-````yaml title="quartz.config.yaml"
+```yaml title="quartz.config.yaml"
 plugins:
   - source: github:theqgquartz/webmentions
     enabled: true
@@ -21,9 +21,8 @@ plugins:
     layout:
       position: afterBody
       priority: 20
-````
+```
 
 ## License
 
 MIT
-
