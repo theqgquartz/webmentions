@@ -1,44 +1,18 @@
 import type { QuartzComponentConstructor, QuartzComponentProps } from "@quartz-community/types";
 import style from "./styles/WebmentionsContent.scss";
 import { formatDate, formatTime } from "../utils/date";
+import type { Webmention } from "../../types/webmention";
+
 export interface WebmentionsContentOptions {
   showLikes: boolean;
   showReposts: boolean;
   showReplies: boolean;
 }
-
 const defaultOptions: WebmentionsContentOptions = {
   showLikes: true,
   showReposts: true,
   showReplies: true,
 };
-
-interface Webmention {
-  source: string;
-  verified: boolean;
-  verified_date: string;
-  id: number;
-  private: boolean;
-
-  data: {
-    author: {
-      name: string;
-      url: string;
-      photo: string;
-    };
-    url: string;
-    name: string | null;
-    content: string | null;
-    published: string | null;
-    published_ts: string | null;
-  };
-
-  activity: {
-    type: string;
-  };
-
-  target: string;
-}
 
 interface ProcessedWebMention {
   likes: number;
@@ -57,30 +31,39 @@ function WebmentionsList({ mentions }: { mentions: Webmention[] }) {
 
   return (
     <div id="webmentions" class="mentions hfeed">
-      {mentions.map((wm: Webmention) => (
-        <div class="h-entry mention">
-          <div class="author u-author h-card">
-            <img src={wm.data.author.photo} class="photo u-photo" />
-            <a href={wm.data.author.url} class="name u-url p-name">
-              {wm.data.author.name}
-            </a>{" "}
-            <a href={wm.data.author.url} class="url">
-              {wm.data.author.url}
-            </a>
+      {mentions.map((wm: Webmention) => {
+        const name = wm.data.author?.name ?? new URL(wm.source).hostname
+        const photo = wm.data.author?.photo;
+        const url = wm.data.author?.url ?? wm.source;
+        return (
+          <div class="h-entry mention">
+            <div class="author u-author h-card">
+              {photo && (
+                <img src={photo} class="photo u-photo" />
+              )}
+              <a href={url ?? "#"} class="name u-url p-name">
+                {name ?? "Unknown author"}
+              </a>{" "}
+              {url && (
+                <a href={url} class="url">
+                  {url}
+                </a>
+              )}
+            </div>
+            <div
+              class="e-content html"
+              dangerouslySetInnerHTML={{ __html: wm.data.content ?? "" }}
+            ></div>
+            <div class="metaline">
+              <time class="dt-published" datetime={wm.verified_date}>
+                <a href={wm.source} class="u-url">
+                  {formatDate(new Date(wm.verified_date))}, {formatTime(new Date(wm.verified_date))}
+                </a>
+              </time>
+            </div>
           </div>
-          <div
-            class="e-content html"
-            dangerouslySetInnerHTML={{ __html: wm.data.content ?? "" }}
-          ></div>
-          <div class="metaline">
-            <time class="dt-published" datetime={wm.verified_date}>
-              <a href={wm.source} class="u-url">
-                {formatDate(new Date(wm.verified_date))}, {formatTime(new Date(wm.verified_date))}
-              </a>
-            </time>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -106,6 +89,7 @@ export default ((opts?: Partial<WebmentionsContentOptions>) => {
           case "repost":
             tally.reposts = (tally.reposts ?? 0) + 1;
             break;
+          case "link":
           case "reply":
             (tally.mentions ??= []).push(mwm);
             break;
@@ -137,7 +121,9 @@ export default ((opts?: Partial<WebmentionsContentOptions>) => {
               </div>
             )}
           </div>
-          {(tally.mentions?.length ?? 0) > 0 && <WebmentionsList mentions={tally.mentions} />}
+          {(tally.mentions?.length ?? 0) > 0 && options.showReplies && (
+            <WebmentionsList mentions={tally.mentions} />
+          )}
           <hr />
         </div>
       );
