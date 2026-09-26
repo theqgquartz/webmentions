@@ -1,8 +1,13 @@
 export { WebmentionsContent, WebmentionsContentOptions } from './components/index.js';
-import { QuartzTransformerPlugin } from '@quartz-community/types';
-export { QuartzComponent, QuartzComponentProps, QuartzTransformerPlugin, StringResource } from '@quartz-community/types';
+import { QuartzTransformerPlugin, QuartzEmitterPlugin } from '@quartz-community/types';
+export { QuartzComponent, QuartzComponentProps, QuartzEmitterPlugin, QuartzTransformerPlugin, StringResource } from '@quartz-community/types';
 import 'preact';
 
 declare const WebmentionTransformer: QuartzTransformerPlugin;
 
-export { WebmentionTransformer };
+interface Options {
+    enableWebmentionsOutput: boolean;
+}
+declare const ContentIndex: QuartzEmitterPlugin<Partial<Options>>;
+
+export { ContentIndex, WebmentionTransformer };

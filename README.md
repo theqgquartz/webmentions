@@ -18,6 +18,7 @@ plugins:
       showLikes: true
       showReposts: true
       showRMentions: true
+      enableWebmentionsOutput: true
     layout:
       position: afterBody
       priority: 20

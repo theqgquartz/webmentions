@@ -58,7 +58,8 @@
   },
   "dependencies": {
     "@quartz-community/types": "github:quartz-community/types",
-    "@quartz-community/utils": "github:quartz-community/utils"
+    "@quartz-community/utils": "github:quartz-community/utils",
+    "hast-util-to-html": "9.0.5"
   },
   "devDependencies": {
     "@types/hast": "^3.0.4",
@@ -76,7 +77,7 @@
     "sass": "^1.97.3",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.6"
+    "vitest": "^5.0.2"
   },
   "engines": {
     "node": ">=22",
@@ -85,8 +86,11 @@
   "quartz": {
     "name": "webmentions",
     "displayName": "Webmentions",
-    "category": "transformer",
-    "version": "1.0.1",
+    "category": [
+      "transformer",
+      "emitter"
+    ],
+    "version": "1.1.0",
     "quartzVersion": ">=5.0.0",
     "dependencies": [],
     "defaultOrder": 50,
@@ -94,11 +98,12 @@
     "defaultOptions": {
       "showLikes": true,
       "showReposts": true,
-      "showReplies": true
+      "showReplies": true,
+      "enableWebmentionsOutput" : true
     },
     "components": {
       "WebmentionsContent": {
-        "displayName": "Webmentsion Content",
+        "displayName": "Webmentions Content",
         "defaultPosition": "afterBody",
         "defaultPriority": 20
       }
@@ -112,7 +117,14 @@
       },
       "showReplies": {
         "type": "boolean"
+      },
+      "enableWebmentionsOutput" : {
+        "type" : "boolean"
       }
     }
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "esbuild@0.27.7": true
   }
 }
