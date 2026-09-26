@@ -25,7 +25,7 @@ interface WebmentionsFile {
   lastFetched: string | null;
   mentions: Webmention[];   // or your real incoming type
   map: Record<string, Webmention>;
-  generated?: string;
+  lastSubmitted: string | null;
   outgoing?: OutgoingWebmention[];
 }
 
@@ -101,10 +101,10 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
       const existing = (await read({file: WEBMENTIONS_FILE})) ?? {
         lastFetched: null,
         mentions: [],
-        map: {}
+        map: {},
+        lastSubmitted: null
       }
 
-      existing.generated = new Date().toISOString()
       existing.outgoing = outgoing
      
       outputs.push(

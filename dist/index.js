@@ -2425,9 +2425,9 @@ var ContentIndex = (opts) => {
       const existing = await read({ file: WEBMENTIONS_FILE }) ?? {
         lastFetched: null,
         mentions: [],
-        map: {}
+        map: {},
+        lastSubmitted: null
       };
-      existing.generated = (/* @__PURE__ */ new Date()).toISOString();
       existing.outgoing = outgoing;
       outputs.push(
         await write({
