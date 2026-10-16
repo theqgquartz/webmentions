@@ -32,15 +32,13 @@ function WebmentionsList({ mentions }: { mentions: Webmention[] }) {
   return (
     <div id="webmentions" class="mentions hfeed">
       {mentions.map((wm: Webmention) => {
-        const name = wm.data.author?.name ?? new URL(wm.source).hostname
+        const name = wm.data.author?.name ?? new URL(wm.source).hostname;
         const photo = wm.data.author?.photo;
         const url = wm.data.author?.url ?? wm.source;
         return (
           <div class="h-entry mention">
             <div class="author u-author h-card">
-              {photo && (
-                <img src={photo} class="photo u-photo" />
-              )}
+              {photo && <img src={photo} class="photo u-photo" />}
               <a href={url ?? "#"} class="name u-url p-name">
                 {name ?? "Unknown author"}
               </a>{" "}
@@ -74,6 +72,7 @@ export default ((opts?: Partial<WebmentionsContentOptions>) => {
 
   function WebmentionsContent({ fileData }: QuartzComponentProps) {
     const wm = fileData.webmentions || undefined;
+    const slug = fileData.slug || undefined;
 
     if (Array.isArray(wm) && wm.length > 0) {
       const tally: ProcessedWebMention = {
@@ -99,7 +98,7 @@ export default ((opts?: Partial<WebmentionsContentOptions>) => {
         <div id="webmentions">
           <div class="webmentions-header">
             <h3 class="webmentions-title">
-              Webmentions{" "}
+              {slug === "index" ? "Site Webmentions" : `Webmentions`}
               <a href="/notes/webmentions" style="color:var(--secondary)">
                 <i class="nf nf-fa-question_circle"></i>
               </a>
