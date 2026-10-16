@@ -90,7 +90,7 @@
       "transformer",
       "emitter"
     ],
-    "version": "1.1.0",
+    "version": "1.1.2",
     "quartzVersion": ">=5.0.0",
     "dependencies": [],
     "defaultOrder": 50,
@@ -99,7 +99,7 @@
       "showLikes": true,
       "showReposts": true,
       "showReplies": true,
-      "enableWebmentionsOutput" : true
+      "enableWebmentionsOutput": true
     },
     "components": {
       "WebmentionsContent": {
@@ -118,8 +118,8 @@
       "showReplies": {
         "type": "boolean"
       },
-      "enableWebmentionsOutput" : {
-        "type" : "boolean"
+      "enableWebmentionsOutput": {
+        "type": "boolean"
       }
     }
   },

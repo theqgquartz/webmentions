@@ -10,7 +10,6 @@ This plugin handles two aspects of [Webmentions](https://indieweb.org/Webmention
 
 ## Installation
 
-
 ```bash
 git clone https://github.com/theqgquartz/webmentions.git
 npm i
@@ -19,6 +18,7 @@ npx quartz plugin add <path to webmentions>
 ```
 
 ## Building
+
 ```bash
 npm run build
 ```

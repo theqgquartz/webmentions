@@ -19,11 +19,11 @@ const defaultOptions: Options = {
   enableWebmentionsOutput: true,
 };
 
-const WEBMENTIONS_FILE = "data/webmentions.json"
+const WEBMENTIONS_FILE = "data/webmentions.json";
 
 interface WebmentionsFile {
   lastFetched: string | null;
-  mentions: Webmention[];   // or your real incoming type
+  mentions: Webmention[]; // or your real incoming type
   map: Record<string, Webmention>;
   lastSubmitted: string | null;
   outgoing?: OutgoingWebmention[];
@@ -46,7 +46,6 @@ const read = async (args: { file: string }): Promise<WebmentionsFile | null> => 
   }
 };
 
-
 const write = async (args: { file: string; content: string }): Promise<FilePath> => {
   const fullPath = path.resolve(args.file);
   await fs.mkdir(path.dirname(fullPath), { recursive: true });
@@ -57,7 +56,6 @@ const write = async (args: { file: string; content: string }): Promise<FilePath>
 export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
   const options = { ...defaultOptions, ...opts };
   const emitAll = async (ctx: BuildCtx, content: ProcessedContent[]): Promise<FilePath[]> => {
-
     const outputs: FilePath[] = [];
 
     if (options.enableWebmentionsOutput) {
@@ -98,15 +96,15 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
         });
       }
 
-      const existing = (await read({file: WEBMENTIONS_FILE})) ?? {
+      const existing = (await read({ file: WEBMENTIONS_FILE })) ?? {
         lastFetched: null,
         mentions: [],
         map: {},
-        lastSubmitted: null
-      }
+        lastSubmitted: null,
+      };
 
-      existing.outgoing = outgoing
-     
+      existing.outgoing = outgoing;
+
       outputs.push(
         await write({
           content: JSON.stringify(existing, null, 2),
