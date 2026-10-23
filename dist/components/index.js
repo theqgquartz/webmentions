@@ -107,7 +107,7 @@ var WebmentionsContent_default2 = ((opts) => {
       return /* @__PURE__ */ u4("div", { id: "webmentions", children: [
         /* @__PURE__ */ u4("div", { class: "webmentions-header", children: [
           /* @__PURE__ */ u4("h3", { class: "webmentions-title", children: [
-            slug === "index" ? "Generic Site Webmentions" : `Webmentions`,
+            slug === "index" ? "Site Webmentions" : `Webmentions`,
             /* @__PURE__ */ u4("a", { href: "/notes/webmentions", style: "color:var(--secondary)", children: /* @__PURE__ */ u4("i", { class: "nf nf-fa-question_circle" }) })
           ] }),
           ((tally.likes ?? 0) > 0 && options.showLikes || (tally.reposts ?? 0) > 0 && options.showReposts) && /* @__PURE__ */ u4("div", { id: "webmentioncounters", children: [

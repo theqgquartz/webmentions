@@ -53,7 +53,7 @@ const write = async (args: { file: string; content: string }): Promise<FilePath>
   return fullPath as FilePath;
 };
 
-export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
+export const WebMentionContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
   const options = { ...defaultOptions, ...opts };
   const emitAll = async (ctx: BuildCtx, content: ProcessedContent[]): Promise<FilePath[]> => {
     const outputs: FilePath[] = [];
@@ -117,7 +117,7 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
   };
 
   return {
-    name: "ContentIndex",
+    name: "WebMentionContentIndex",
     emit: (ctx, content) => emitAll(ctx, content),
     // RSS auto-discovery link tag should be added via a component plugin or manually in the layout.
     partialEmit: (ctx, content) => emitAll(ctx, content),

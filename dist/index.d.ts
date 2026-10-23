@@ -8,6 +8,6 @@ declare const WebmentionTransformer: QuartzTransformerPlugin;
 interface Options {
     enableWebmentionsOutput: boolean;
 }
-declare const ContentIndex: QuartzEmitterPlugin<Partial<Options>>;
+declare const WebMentionContentIndex: QuartzEmitterPlugin<Partial<Options>>;
 
-export { ContentIndex, WebmentionTransformer };
+export { WebMentionContentIndex, WebmentionTransformer };

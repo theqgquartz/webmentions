@@ -115,7 +115,7 @@ var WebmentionsContent_default2 = ((opts) => {
       return /* @__PURE__ */ u4("div", { id: "webmentions", children: [
         /* @__PURE__ */ u4("div", { class: "webmentions-header", children: [
           /* @__PURE__ */ u4("h3", { class: "webmentions-title", children: [
-            slug === "index" ? "Generic Site Webmentions" : `Webmentions`,
+            slug === "index" ? "Site Webmentions" : `Webmentions`,
             /* @__PURE__ */ u4("a", { href: "/notes/webmentions", style: "color:var(--secondary)", children: /* @__PURE__ */ u4("i", { class: "nf nf-fa-question_circle" }) })
           ] }),
           ((tally.likes ?? 0) > 0 && options.showLikes || (tally.reposts ?? 0) > 0 && options.showReposts) && /* @__PURE__ */ u4("div", { id: "webmentioncounters", children: [
@@ -2392,7 +2392,7 @@ var write = async (args) => {
   await fs2.writeFile(fullPath, args.content, "utf8");
   return fullPath;
 };
-var ContentIndex = (opts) => {
+var WebMentionContentIndex = (opts) => {
   const options = { ...defaultOptions2, ...opts };
   const emitAll = async (ctx, content) => {
     const outputs = [];
@@ -2439,13 +2439,13 @@ var ContentIndex = (opts) => {
     return outputs;
   };
   return {
-    name: "ContentIndex",
+    name: "WebMentionContentIndex",
     emit: (ctx, content) => emitAll(ctx, content),
     // RSS auto-discovery link tag should be added via a component plugin or manually in the layout.
     partialEmit: (ctx, content) => emitAll(ctx, content)
   };
 };
 
-export { ContentIndex, WebmentionTransformer, WebmentionsContent_default2 as WebmentionsContent };
+export { WebMentionContentIndex, WebmentionTransformer, WebmentionsContent_default2 as WebmentionsContent };
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map
